@@ -1,0 +1,8 @@
+{% for task in tasks %}
+{{task.title}}
+{{task.comment}}
+{{task.created_time}}
+{{task.is_done}}
+{{task.photo.url}}
+{{task.deleted_time}}
+{% endfor %}
