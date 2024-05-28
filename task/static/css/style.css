@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+.listtask {
+    display: flex;
+    justify-content: center;
+}
+
+.scrollable-list {
+    max-height: 250px; /* Set max height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Optional: Add border for aesthetics */
+}
+
+.scrollable-list ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.scrollable-list li {
+    padding: 5px;
+    border-bottom: 1px solid #ddd; /* Optional: Add border between list items */
+}
+
+.scrollable-list li:last-child {
+    border-bottom: none; /* Remove border for the last list item */
+}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import *
+from .forms import *
 # Create your views here.
 
 
@@ -13,6 +14,11 @@ from .models import *
 
 def listtask(request):
     tasks = Task.objects.all()
+    form = TaskForm
+    # if request.method=='POST':
+    #     if is_valid():
+            
     return render(request, 'index.html', context={
         'tasks':tasks,
+        'form': form,
     })

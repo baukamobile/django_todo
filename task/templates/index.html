@@ -1,2 +1,24 @@
-{% for task in tasks %} {{task.title}} {{task.comment}} {{task.created_time}}
-{{task.is_done}} {{task.deleted_time}} {% endfor %}
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+<div class="formlist">
+    <h1>Add task</h1>
+    <form action="listtask" method="post" class="listtask">
+        <input type="text" placeholder="title" />
+        <input type="text" placeholder="comment" />
+        <button>Save</button>
+    </form>
+    <div class="scrollable-list">
+        <ul>
+            {% for task in tasks %}
+            <li>
+                {{task.title}} {{task.comment}} {{task.created_time}}
+                {{task.is_done}} {{task.deleted_time}}
+            </li>
+            <button>Update Task</button>
+            <button>Delete Task</button>
+            {% endfor %}
+            <!-- Add more list items here -->
+        </ul>
+    </div>
+</div>
+{% endblock %}
