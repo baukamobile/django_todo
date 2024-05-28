@@ -9,3 +9,5 @@ class Task(models.Model):
     is_done = models.BooleanField(default=False, blank=True)
     photo = models.ImageField(blank=True, null=True)
     deleted_time = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return self.title
