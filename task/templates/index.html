@@ -3,9 +3,12 @@
 <div class="formlist">
     <h1>Add task</h1>
     <form action="listtask" method="post" class="listtask">
+        {% csrf_token %}
         <input type="text" placeholder="title" />
         <input type="text" placeholder="comment" />
-        <button>Save</button>
+
+        <a class="nav-link" href="{% url 'createtask' %}">Save list</a>
+        <!-- <button type="submit">Save</button> -->
     </form>
     <div class="scrollable-list">
         <ul>
