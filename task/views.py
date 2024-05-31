@@ -1,5 +1,6 @@
+from django.contrib.admin.utils import reverse
 from django.http.response import HttpResponsePermanentRedirect
-from django.shortcuts import redirect, render, HttpResponseRedirect
+from django.shortcuts import redirect, render, HttpResponseRedirect, get_object_or_404
 from django.views.generic import ListView
 from .models import *
 from .forms import *
@@ -16,24 +17,37 @@ from .forms import *
 def listtask(request):
     tasks = Task.objects.all()
     form = TaskForm
-    # if request.method=='POST':
-    #     if is_valid():
+
 
     return render(request, 'index.html', context={
         'tasks':tasks,
         'form': form,
     })
+
+def detail_view(request, id):
+    # context ={}
+    data = Task.objects.get(id = id)
+    return render(request, "details.html", context={'data':data})
+
 def createTask(request):
-    if request.method=="POST":
-        form = TaskForm(request.POST)
-        print(form)
-        if form.is_valid():
-            print(form)
-            form.save()
-            return redirect('index.html')
+    form = TaskForm(request.POST or None)
+    context={
+        'form':form,
+    }
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('listtask'))
     else:
-        form = TaskForm()
-        print(form)
-    return render(request, 'index.html', context={
-                'form':form,
-            })
+        return render(request,'index.html', context=context)
+
+
+def update_view(request, id):
+    obj = get_object_or_404(Task, id=id)
+    form = TaskForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('detail', args=[id]))
+    return render(request, 'update.html', context={
+        'task': obj,
+        'form': form,
+    })
