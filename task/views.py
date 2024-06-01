@@ -84,3 +84,10 @@ def submitting_view(request, id):
         form.save()
         return redirect(reverse('listtask'))  # Assuming 'createtask' is the correct URL
     return render(request, 'index.html', context={'submitting': submitting, 'form': form})
+
+
+def logIn(request):
+    return render(request, 'login.html')
+def register(request):
+    return render(request, 'register.html')
+

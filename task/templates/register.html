@@ -1,0 +1,15 @@
+{% extends 'task/base.html' %}
+{% block title %} Register {% endblock %}
+{% load crispy_form_tags %}
+{% load crispy_forms_filters %}
+{% load admin_modify %}
+
+
+{% block content %}
+<form method="post" > 
+{% csrf_token %}
+{{form/crispy}}
+<!-- <p>Dont't have any account? Create one <a href="/sign-up" >Here</a></p> -->
+<button type="submit" class="btn btn-success" >Register</button>
+</form>
+{% endblock %}

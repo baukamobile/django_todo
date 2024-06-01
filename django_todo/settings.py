@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task',
-    'todo',
     'rest_framework',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,6 +70,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': [
+                            'crispy_forms.templatetags.crispy_forms_tags', # Make sure this line is present
+                        ],
         },
     },
 ]
@@ -130,3 +137,18 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# {% extends 'task/base.html' %}
+# {% block title %} Register {% endblock %}
+# {% load crispy_form_tags %}
+
+# {% block content %}
+# <form method="post" >
+# {% csrf_token %}
+# {{form/crispy}}
+# <!-- <p>Dont't have any account? Create one <a href="/sign-up" >Here</a></p> -->
+# <button type="submit" class="btn btn-success" >Register</button>
+# </form>
+# {% endblock %}

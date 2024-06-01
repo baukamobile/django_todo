@@ -1,6 +1,6 @@
 from django.urls import path
 
-from task.views import delete_view, detail_view, listtask, submitting_view, update_view, CreateSomeTasks
+from task.views import delete_view, detail_view, listtask, logIn, register, submitting_view, update_view, CreateSomeTasks
 from rest_framework.routers import SimpleRouter
 
 
@@ -18,6 +18,8 @@ urlpatterns = [
     path('<int:id>/', update_view, name='update'),
     path('<int:id>/delete/', delete_view, name='delete'),
     path('<int:id>/submitting/', submitting_view, name='submitting'),
+    path('login/', logIn, name='login'),
+    path('register/', register, name='register'),
 
 
 ]
