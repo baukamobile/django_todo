@@ -1,4 +1,4 @@
-<form method="post" action="{% url 'update' task.id %}">
+<form method="post" action="{% url 'update' obj.id %}">
     {% csrf_token %} {{ form.as_p }}
     <!-- <div>
             <input type="checkbox" id="id_complete" name="complete" {% if task.complete %}checked{% endif %}>

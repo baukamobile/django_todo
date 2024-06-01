@@ -15,6 +15,8 @@ from rest_framework.viewsets import ModelViewSet
 #     tasks = Task.objects.all()
 #     template_name='index.html'
 #     context = {'tasks':tasks,}
+# 
+# 
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
@@ -55,11 +57,18 @@ def update_view(request, id):
     if form.is_valid():
         form.save()
         return redirect(reverse('listtask'))  # Assuming 'createtask' is the correct URL
-    return render(request, 'update.html', context={'task': obj, 'form': form})
+    return render(request, 'update.html', context={'obj': obj, 'form': form})
 
 def delete_view(request, id):
     obj_del = get_object_or_404(Task, id=id)
     obj_del.delete()
-    return redirect(reverse('createtask'), context={
+    return redirect(reverse('listtask'), context={
         'obj_del':obj_del,
     })
+def submitting_view(request, id):
+    submitting = Task.objects.get(request, id)
+    form = TaskForm(request.POST or None, instance=submitting)
+    if form.is_valid():
+        form.save()
+        return redirect(reverse('listtask'))  # Assuming 'createtask' is the correct URL
+    return render(request, 'index.html', context={'submitting': submitting, 'form': form})

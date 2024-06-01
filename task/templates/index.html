@@ -5,16 +5,14 @@
     <form action="{% url 'createtask' %}" method="post" class="createtask">
         {% csrf_token %}
         <div class="forming">{{ form.as_p }}</div>
-        <input type="checkbox" id="task{{ task.id }}" name="complete" value="done" {% if task.complete %}checked{% endif %}>
-                    <label for="task{{ task.id }}">Is done?</label>
-        <input type="submit" value="submit" />
+        
     </form>
     <div class="scrollable-list">
         <ul>
             {% for task in tasks %}
             <li>
                 {{task.title}} {{task.comment}} {{task.created_time}}
-                {% if form.complete %}
+                {% if form.complete or task.is_done %}
                 <div>
                     <input
                         type="checkbox"
@@ -22,7 +20,7 @@
                         name="task{{ task.id }}"
                         value="done"
                         checked
-                        disabled
+                        
                     />
                     <label for="task{{ task.id }}">Is done?</label>
                 </div>
@@ -37,7 +35,7 @@
                     <label for="task{{ task.id }}">Is done?</label>
                 </div>
                 {{task.deleted_time}} {% endif %}
-                <a href="{% url 'listtask' %}" >Submit</a>
+                <a href="{% url 'delete' task.id %}" >Submit</a>
             </li>
             <a href="{% url 'update' task.id %}">Update Task</a>
             <a href="{% url 'delete' task.id %}">Delete Task</a>
