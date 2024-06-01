@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <form method="post" action="{% url 'update' obj.id %}">
     {% csrf_token %} {{ form.as_p }}
     <!-- <div>
@@ -7,3 +10,4 @@
     <a href="{% url 'listtask' %}">Cancel</a>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
+{% endblock %}

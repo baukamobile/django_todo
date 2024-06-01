@@ -2,13 +2,15 @@ from django.contrib.admin.utils import reverse
 from django.http.response import HttpResponsePermanentRedirect
 from django.shortcuts import redirect, render, HttpResponseRedirect, get_object_or_404
 from django.views.generic import ListView
-from rest_framework import permissions
+from rest_framework import permissions, serializers
+from rest_framework import viewsets
 
 from task.serializers import TaskSerializer
 from .models import *
 from .forms import *
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 # Create your views here.
 
 
@@ -19,34 +21,23 @@ from rest_framework.permissions import IsAuthenticated
 #     context = {'tasks':tasks,}
 #
 #
-<<<<<<< HEAD
 
 
 
-class ListViewtaskSet(ModelViewSet):
-    queryset = Task.objects.all()
-    permission_classes = [IsAuthenticated]
-=======
-<<<<<<< HEAD
+
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
 
-=======
-
->>>>>>> 914a174
 
 
-class ListViewtaskSet(ModelViewSet):
-    queryset = Task.objects.all()
-    permission_classes = [IsAuthenticated]
->>>>>>> 5165947 (some problems)
+# >>>>>>> 5165947 (some problems)
 
 def listtask(request):
     tasks = Task.objects.all()
     form = TaskForm
-    
+
 
 
     return render(request, 'index.html', context={
@@ -58,17 +49,18 @@ def detail_view(request, id):
     # context ={}
     data = Task.objects.get(id = id)
     return render(request, "details.html", context={'data':data})
-
-def createTask(request):
-    form = TaskForm(request.POST or None)
-    context={
-        'form':form,
-    }
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('listtask'))
-    else:
-        return render(request,'index.html', context=context)
+class CreateSomeTasks(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    permission_classes= [IsAuthenticated]
+    serializer_class = TaskSerializer
+    @action(detail=False, methods=['post'])
+    def createTask(request):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect(reverse('listtask'))
+        else:
+            return render(request,'index.html',)
 
 
 def update_view(request, id):
