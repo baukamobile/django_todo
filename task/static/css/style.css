@@ -27,3 +27,16 @@ body {
 .scrollable-list li:last-child {
     border-bottom: none; /* Remove border for the last list item */
 }
+/* Style all text input fields */
+input[type="title"], input[type="comment"],textarea {
+    width: 100%; /* Change this value to the desired width */
+    padding: 10px; /* Optional: adjust padding for better appearance */
+    font-size: 16px; /* Optional: adjust font size */
+}
+
+/* Style select fields if any */
+select {
+    width: 100%; /* Change this value to the desired width */
+    padding: 10px; /* Optional: adjust padding for better appearance */
+    font-size: 16px; /* Optional: adjust font size */
+}

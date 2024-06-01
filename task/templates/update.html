@@ -1,6 +1,9 @@
-<form>
-{% csrf_token %}
-{{ form.as_p }}
-
-<input type="submit" value="update">
+<form method="post" action="{% url 'update' task.id %}">
+    {% csrf_token %} {{ form.as_p }}
+    <!-- <div>
+            <input type="checkbox" id="id_complete" name="complete" {% if task.complete %}checked{% endif %}>
+            <label for="id_complete">Is Done?</label>
+        </div> -->
+    <a href="{% url 'listtask' %}">Cancel</a>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>

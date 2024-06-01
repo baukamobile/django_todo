@@ -2,8 +2,11 @@ from django.contrib.admin.utils import reverse
 from django.http.response import HttpResponsePermanentRedirect
 from django.shortcuts import redirect, render, HttpResponseRedirect, get_object_or_404
 from django.views.generic import ListView
+
+from task.serializers import TaskSerializer
 from .models import *
 from .forms import *
+from rest_framework.viewsets import ModelViewSet
 # Create your views here.
 
 
@@ -12,6 +15,11 @@ from .forms import *
 #     tasks = Task.objects.all()
 #     template_name='index.html'
 #     context = {'tasks':tasks,}
+class TaskViewSet(ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
 
 
 def listtask(request):
@@ -46,8 +54,12 @@ def update_view(request, id):
     form = TaskForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        return redirect(reverse('detail', args=[id]))
-    return render(request, 'update.html', context={
-        'task': obj,
-        'form': form,
+        return redirect(reverse('listtask'))  # Assuming 'createtask' is the correct URL
+    return render(request, 'update.html', context={'task': obj, 'form': form})
+
+def delete_view(request, id):
+    obj_del = get_object_or_404(Task, id=id)
+    obj_del.delete()
+    return redirect(reverse('createtask'), context={
+        'obj_del':obj_del,
     })
