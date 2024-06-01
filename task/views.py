@@ -19,11 +19,20 @@ from rest_framework.permissions import IsAuthenticated
 #     context = {'tasks':tasks,}
 #
 #
+<<<<<<< HEAD
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
 
+=======
+
+
+
+class ListViewtaskSet(ModelViewSet):
+    queryset = Task.objects.all()
+    permission_classes = [IsAuthenticated]
+>>>>>>> 5165947 (some problems)
 
 def listtask(request):
     tasks = Task.objects.all()
