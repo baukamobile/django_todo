@@ -7,6 +7,7 @@ from task.serializers import TaskSerializer
 from .models import *
 from .forms import *
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
@@ -15,14 +16,14 @@ from rest_framework.viewsets import ModelViewSet
 #     tasks = Task.objects.all()
 #     template_name='index.html'
 #     context = {'tasks':tasks,}
-# 
-# 
-class TaskViewSet(ModelViewSet):
+#
+#
+
+
+
+class ListViewtaskSet(ModelViewSet):
     queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-
-
-
+    permission_classes = [IsAuthenticated]
 
 def listtask(request):
     tasks = Task.objects.all()
