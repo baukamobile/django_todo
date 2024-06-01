@@ -9,10 +9,18 @@ router = SimpleRouter()
 
 
 urlpatterns = [
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5165947 (some problems)
+>>>>>>> 914a174
     path('', listtask,name='listtask'),
     # path('serializing/', TaskViewSet.as_view,name='tasklist'),
     path('alltask/', ListViewtaskSet,name='all'),
     path('create/', createTask, name='createtask'),
+
     path('<int:id>/details/', detail_view, name='detail'),
     path('<int:id>/', update_view, name='update'),
     path('<int:id>/delete/', delete_view, name='delete'),
