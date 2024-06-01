@@ -9,9 +9,10 @@ router.register(r'task',TaskViewSet)
 
 
 urlpatterns = [
-    path('serialize/', TaskViewSet,name='tasklist'),
+
     path('', listtask,name='listtask'),
     path('create/', createTask, name='createtask'),
+
     path('<int:id>/details/', detail_view, name='detail'),
     path('<int:id>/', update_view, name='update'),
     path('<int:id>/delete/', delete_view, name='delete'),

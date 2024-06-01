@@ -2,11 +2,13 @@ from django.contrib.admin.utils import reverse
 from django.http.response import HttpResponsePermanentRedirect
 from django.shortcuts import redirect, render, HttpResponseRedirect, get_object_or_404
 from django.views.generic import ListView
+from rest_framework import permissions
 
 from task.serializers import TaskSerializer
 from .models import *
 from .forms import *
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
@@ -15,18 +17,18 @@ from rest_framework.viewsets import ModelViewSet
 #     tasks = Task.objects.all()
 #     template_name='index.html'
 #     context = {'tasks':tasks,}
-# 
-# 
+#
+#
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
 
 
-
 def listtask(request):
     tasks = Task.objects.all()
     form = TaskForm
+    
 
 
     return render(request, 'index.html', context={
