@@ -21,27 +21,25 @@ from rest_framework.decorators import action
 #     context = {'tasks':tasks,}
 #
 #
-<<<<<<< HEAD
 
 
 
 
-=======
-<<<<<<< HEAD
->>>>>>> 914a174 (nothing)
+
+
 class TaskViewSet(ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
 
-=======
+
 
 
 
 class ListViewtaskSet(ModelViewSet):
     queryset = Task.objects.all()
     permission_classes = [IsAuthenticated]
->>>>>>> 5165947 (some problems)
+
 
 
 # >>>>>>> 5165947 (some problems)
